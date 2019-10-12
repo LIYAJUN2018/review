@@ -1,4 +1,4 @@
-package jianzhiOffer.offer.datastructure;
+package jianzhiOffer.datastructure;
 
 //  Definition for binary tree
 public class TreeNode {

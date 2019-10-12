@@ -1,12 +1,12 @@
-package jianzhiOffer.offer;
+package jianzhiOffer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
-import jianzhiOffer.offer.datastructure.ListNode;
-import jianzhiOffer.offer.datastructure.TreeNode;
+import jianzhiOffer.datastructure.ListNode;
+import jianzhiOffer.datastructure.TreeNode;
 
 public class Solution {
 
@@ -328,152 +328,209 @@ public class Solution {
 
 	/**
 	 * 
-	  * 题目描述：
-	  * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，
-	  * 使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，
-	  * 并保证奇数和奇数，偶数和偶数之间的相对位置不变。
-	  * 解题思路：
-	  * 用两个list分别存储奇数和偶数，然后再放回数组中
-	  * 本方法由 LYJ 创建于2019年9月1日 下午7:45:59
+	 * 题目描述： 输入一个整数数组，实现一个函数来调整该数组中数字的顺序， 使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，
+	 * 并保证奇数和奇数，偶数和偶数之间的相对位置不变。 解题思路： 用两个list分别存储奇数和偶数，然后再放回数组中 本方法由 LYJ
+	 * 创建于2019年9月1日 下午7:45:59
+	 * 
 	 * @param array void
 	 */
 	public static void reOrderArray(int[] array) {
 
 		ArrayList<Integer> ji = new ArrayList<Integer>();
 		ArrayList<Integer> ou = new ArrayList<Integer>();
-		
+
 		for (Integer integer : array) {
-			if(integer % 2 == 0) {
+			if (integer % 2 == 0) {
 				ou.add(integer);
-			}else {
+			} else {
 				ji.add(integer);
 			}
 		}
 		int i;
-		for(i = 0; i < ji.size(); i ++) {
+		for (i = 0; i < ji.size(); i++) {
 			array[i] = ji.get(i);
 		}
-		for(int j = 0; j < ou.size(); j++) {
+		for (int j = 0; j < ou.size(); j++) {
 			array[i] = ou.get(j);
 			i++;
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
-	  * 题目描述：
-	  * 输入一个链表，输出该链表中倒数第k个结点
-	  * 解题思路：
-	  * 通过两个指针p1,p2，p1先走到k-1，然后两个指针同时走剩下的n-k+1
-	  * 本方法由 LYJ 创建于2019年9月1日 下午7:57:15
+	 * 题目描述： 输入一个链表，输出该链表中倒数第k个结点 解题思路： 通过两个指针p1,p2，p1先走到k-1，然后两个指针同时走剩下的n-k+1 本方法由
+	 * LYJ 创建于2019年9月1日 下午7:57:15
+	 * 
 	 * @param head
 	 * @param k
 	 * @return ListNode
 	 */
-	public static ListNode FindKthToTail(ListNode head,int k) {
-		
-		if(null == head || k < 1) {
+	public static ListNode FindKthToTail(ListNode head, int k) {
+
+		if (null == head || k < 1) {
 			return null;
 		}
 		ListNode p1 = head;
 		ListNode p2 = head;
-		
-		for(int i = 0; (i < k - 1) && (p1 != null); i ++) {
+
+		for (int i = 0; (i < k - 1) && (p1 != null); i++) {
 			p1 = p1.next;
 		}
-		if(p1 == null) {
+		if (p1 == null) {
 			return null;
 		}
-		while(p1.next != null) {
+		while (p1.next != null) {
 			p1 = p1.next;
 			p2 = p2.next;
 		}
 
 		return p2;
-    }
+	}
+
 	/**
-	 * 题目描述：
-	  * 输入一个链表，反转链表后，输出新链表的表头。
-	  * 本方法由 LYJ 创建于2019年9月1日 下午8:20:10
+	 * 题目描述： 输入一个链表，反转链表后，输出新链表的表头。 本方法由 LYJ 创建于2019年9月1日 下午8:20:10
+	 * 
 	 * @param head
 	 * @return ListNode
 	 */
 	public static ListNode ReverseList(ListNode head) {
-		if(null == head) {
+		if (null == head) {
 			return null;
 		}
-		
+
 		ListNode pre = null;
 		ListNode curr = null;
-		while(null != head.next) {
+		while (null != head.next) {
 			curr = head.next;
 			head.next = pre;
 			pre = head;
 			head = curr;
 		}
 		head.next = pre;
-		
+
 		return head;
-    }
-	
+	}
+
 	/**
 	 * 
-	  * 题目描述：
-	  * 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
-	  * 本方法由 LYJ 创建于2019年9月1日 下午8:32:05
+	 * 题目描述： 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。 本方法由 LYJ 创建于2019年9月1日
+	 * 下午8:32:05
+	 * 
 	 * @param list1
 	 * @param list2
 	 * @return ListNode
 	 */
-	 public ListNode Merge(ListNode list1,ListNode list2) {
-		 
-		 if(null == list1) {
-			 return list2;
-		 }
-		 if(null == list2) {
-			 return list1;
-		 }
-		 
-		 ListNode head = new ListNode(0);
-		 ListNode p = head;
-		 while((null != list1) && (null != list2)) {
-			 ListNode listNode;
-			 if(list1.val <= list2.val) {
-				 listNode = new ListNode(list1.val);
-				 list1 = list1.next;
-			 } else {
-				 listNode = new ListNode(list2.val);
-				 list2 = list2.next;
-			 }
-			 p.next = listNode;
-			 p = p.next;
-		 }
-		 if(null == list1) {
-			 ListNode listNode;
-			 while(null != list2) {
-				 listNode = new ListNode(list2.val);
-				 p.next = listNode;
-				 p = p.next;
-				 list2 = list2.next;
-			 }
-		 }
-		 if(null == list2) {
-			 ListNode listNode;
-			 while(null != list1) {
-				 listNode = new ListNode(list1.val);
-				 p.next = listNode;
-				 p = p.next;
-				 list1 = list1.next;
-			 }
-		 }
-		 
-		 return head.next;
-	        
+	public ListNode Merge(ListNode list1, ListNode list2) {
+
+		if (null == list1) {
+			return list2;
+		}
+		if (null == list2) {
+			return list1;
+		}
+
+		ListNode head = new ListNode(0);
+		ListNode p = head;
+		while ((null != list1) && (null != list2)) {
+			ListNode listNode;
+			if (list1.val <= list2.val) {
+				listNode = new ListNode(list1.val);
+				list1 = list1.next;
+			} else {
+				listNode = new ListNode(list2.val);
+				list2 = list2.next;
+			}
+			p.next = listNode;
+			p = p.next;
+		}
+		if (null == list1) {
+			ListNode listNode;
+			while (null != list2) {
+				listNode = new ListNode(list2.val);
+				p.next = listNode;
+				p = p.next;
+				list2 = list2.next;
+			}
+		}
+		if (null == list2) {
+			ListNode listNode;
+			while (null != list1) {
+				listNode = new ListNode(list1.val);
+				p.next = listNode;
+				p = p.next;
+				list1 = list1.next;
+			}
+		}
+
+		return head.next;
+
+	}
+
+	/**
+	 * ？？？
+	  * 题目描述：
+	  * 输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+	  * 
+	  * 解题思路：
+	* 1.首先需要判断A,B的根节点是否一样。
+	* 2.如果不一样，判断A的左孩子和B的根节点是否一样，同理可判断A的右孩子和B的根节点是否一样。依次找下去，
+	* 如果上述情况都不满足则说明不包含
+	* 1.如果找到了A中有值和B中的根节点相同，则比较左右子树是否相同。
+	* 2.如果B为空了，则说明包含
+	* 3.如果A为空了，则说明不包含
+	  * 本方法由 LYJ 创建于2019年9月2日 下午7:09:41
+	 * @param root1
+	 * @param root2
+	 * @return boolean
+	 */
+	public boolean HasSubtree(TreeNode root1, TreeNode root2) {
+		if (root1 == null || root2 == null) {
+			return false;
+		}
+		return isSubTree(root1, root2) || isSubTree(root1.left, root2) || isSubTree(root1.right, root2);
+	}
+
+	public boolean isSubTree(TreeNode root1, TreeNode root2) {
+		
+		if(root2 ==  null) {
+			return true;
+		}
+		if (root1 == null) {
+			return false;
+		}
+		if (root1.val != root2.val) {
+            return false;
+        }
+		return isSubTree(root1.left, root2.left) && isSubTree(root1.right, root2.right);
+	}
+	
+	 public ArrayList<Integer> printMatrix(int [][] matrix) {
+	       int up = 0;
+	       int down = matrix.length;
+	       int left = 0;
+	       int right = matrix[0].length;
+	       
+	       ArrayList<Integer> arrayList = new ArrayList<Integer>();
+	       while(true) {
+	    	   for(int i = left; i < matrix[up].length; i++) {
+	    		   arrayList.add(matrix[up][i]);
+	    	   }
+	    	   if((++ up) == down) {
+	    		   break;
+	    	   }
+	    	   for(int i = up; i <= down; i++) {
+	    		   arrayList.add(matrix[i][right]);
+	    	   }
+	    	   if((++ right) == left) {	
+	    		   break;
+	    	   }
+	       }
+	       
 	    }
 
 	public static void main(String[] args) {
-		//int[] array = {1,2,3,4,5,6,7};
+		// int[] array = {1,2,3,4,5,6,7};
 		ListNode listNode = new ListNode(1);
 		ListNode listNode1 = new ListNode(2);
 		ListNode listNode2 = new ListNode(3);
@@ -484,7 +541,7 @@ public class Solution {
 		listNode2.next = listNode3;
 		listNode3.next = listNode4;
 		listNode4.next = null;
-		
+
 		ReverseList(listNode);
 	}
 
